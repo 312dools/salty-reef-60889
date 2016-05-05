@@ -14,8 +14,10 @@
         %p= link_to "Proof App", root_path
       #buttons
         - if user_signed_in?
-          = link_to "New Proof", new_post_path
           = link_to 'Log out', destroy_user_session_path, :method => :delete
+          - if user_is_teacher?
+            = link_to "New Proof", new_post_path
+
 
         - else
           = link_to "Sign Up", new_user_registration_path
