@@ -163,44 +163,316 @@ body {
   }
 }
 
+/*csslint box-model:false*/
+/*
+Box-model set to false because we're setting a height on select elements, which
+also have border and padding. This is done because some browsers don't render
+the padding. We explicitly set the box-model for select elements to border-box,
+so we can ignore the csslint warning.
+*/
+
+.simple_form input[type="text"],
+.simple_form input[type="password"],
+.simple_form input[type="email"],
+.simple_form input[type="url"],
+.simple_form input[type="date"],
+.simple_form input[type="month"],
+.simple_form input[type="time"],
+.simple_form input[type="datetime"],
+.simple_form input[type="datetime-local"],
+.simple_form input[type="week"],
+.simple_form input[type="number"],
+.simple_form input[type="search"],
+.simple_form input[type="tel"],
+.simple_form input[type="color"],
+.simple_form select,
+.simple_form textarea {
+    padding: 0.5em 0.6em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.simple_form input:not([type]) {
+    padding: 0.5em 0.6em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/* Chrome (as of v.32/34 on OS X) needs additional room for color to display. */
+/* May be able to remove this tweak as color inputs become more standardized across browsers. */
+.simple_form input[type="color"] {
+    padding: 0.2em 0.5em;
+}
+
+
+.simple_form input[type="text"]:focus,
+.simple_form input[type="password"]:focus,
+.simple_form input[type="email"]:focus,
+.simple_form input[type="url"]:focus,
+.simple_form input[type="date"]:focus,
+.simple_form input[type="month"]:focus,
+.simple_form input[type="time"]:focus,
+.simple_form input[type="datetime"]:focus,
+.simple_form input[type="datetime-local"]:focus,
+.simple_form input[type="week"]:focus,
+.simple_form input[type="number"]:focus,
+.simple_form input[type="search"]:focus,
+.simple_form input[type="tel"]:focus,
+.simple_form input[type="color"]:focus,
+.simple_form select:focus,
+.simple_form textarea:focus {
+    outline: 0;
+    border-color: #129FEA;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.simple_form input:not([type]):focus {
+    outline: 0;
+    border-color: #129FEA;
+}
+
+.simple_form input[type="file"]:focus,
+.simple_form input[type="radio"]:focus,
+.simple_form input[type="checkbox"]:focus {
+    outline: thin solid #129FEA;
+    outline: 1px auto #129FEA;
+}
+.simple_form .pure-checkbox,
+.simple_form .pure-radio {
+    margin: 0.5em 0;
+    display: block;
+}
+
+.simple_form input[type="text"][disabled],
+.simple_form input[type="password"][disabled],
+.simple_form input[type="email"][disabled],
+.simple_form input[type="url"][disabled],
+.simple_form input[type="date"][disabled],
+.simple_form input[type="month"][disabled],
+.simple_form input[type="time"][disabled],
+.simple_form input[type="datetime"][disabled],
+.simple_form input[type="datetime-local"][disabled],
+.simple_form input[type="week"][disabled],
+.simple_form input[type="number"][disabled],
+.simple_form input[type="search"][disabled],
+.simple_form input[type="tel"][disabled],
+.simple_form input[type="color"][disabled],
+.simple_form select[disabled],
+.simple_form textarea[disabled] {
+    cursor: not-allowed;
+    background-color: #eaeded;
+    color: #cad2d3;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.simple_form input:not([type])[disabled] {
+    cursor: not-allowed;
+    background-color: #eaeded;
+    color: #cad2d3;
+}
+.simple_form input[readonly],
+.simple_form select[readonly],
+.simple_form textarea[readonly] {
+    background-color: #eee; /* menu hover bg color */
+    color: #777; /* menu text color */
+    border-color: #ccc;
+}
+
+.simple_form input:focus:invalid,
+.simple_form textarea:focus:invalid,
+.simple_form select:focus:invalid {
+    color: #b94a48;
+    border-color: #e9322d;
+}
+.simple_form input[type="file"]:focus:invalid:focus,
+.simple_form input[type="radio"]:focus:invalid:focus,
+.simple_form input[type="checkbox"]:focus:invalid:focus {
+    outline-color: #e9322d;
+}
+.simple_form select {
+    /* Normalizes the height; padding is not sufficient. */
+    height: 2.25em;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+.simple_form select[multiple] {
+    height: auto;
+}
 .simple_form label {
-  float: left;
-  width: 100px;
-  text-align: right;
-  margin: 2px 10px;
+    margin: 0.5em 0 0.2em;
+}
+.simple_form fieldset {
+    margin: 0;
+    padding: 0.35em 0 0.75em;
+    border: 0;
+}
+.simple_form legend {
+    display: block;
+    width: 100%;
+    padding: 0.3em 0;
+    margin-bottom: 0.3em;
+    color: #333;
+    border-bottom: 1px solid #e5e5e5;
 }
 
-.simple_form div.input {
-  margin-bottom: 10px;
+.simple_form-stacked input[type="text"],
+.simple_form-stacked input[type="password"],
+.simple_form-stacked input[type="email"],
+.simple_form-stacked input[type="url"],
+.simple_form-stacked input[type="date"],
+.simple_form-stacked input[type="month"],
+.simple_form-stacked input[type="time"],
+.simple_form-stacked input[type="datetime"],
+.simple_form-stacked input[type="datetime-local"],
+.simple_form-stacked input[type="week"],
+.simple_form-stacked input[type="number"],
+.simple_form-stacked input[type="search"],
+.simple_form-stacked input[type="tel"],
+.simple_form-stacked input[type="color"],
+.simple_form-stacked input[type="file"],
+.simple_form-stacked select,
+.simple_form-stacked label,
+.simple_form-stacked textarea {
+    display: block;
+    margin: 0.25em 0;
 }
 
-.simple_form div.boolean, .simple_form input[type='submit'] {
-  margin-left: 120px;
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.simple_form-stacked input:not([type]) {
+    display: block;
+    margin: 0.25em 0;
+}
+.simple_form-aligned input,
+.simple_form-aligned textarea,
+.simple_form-aligned select,
+/* NOTE: pure-help-inline is deprecated. Use .simple_form-message-inline instead. */
+.simple_form-aligned .pure-help-inline,
+.simple_form-message-inline {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: middle;
+}
+.simple_form-aligned textarea {
+    vertical-align: top;
 }
 
-.simple_form div.boolean label, .simple_form label.collection_radio {
-  float: none;
-  margin: 0;
+/* Aligned Forms */
+.simple_form-aligned .pure-control-group {
+    margin-bottom: 0.5em;
+}
+.simple_form-aligned .pure-control-group label {
+    text-align: right;
+    display: inline-block;
+    vertical-align: middle;
+    width: 10em;
+    margin: 0 1em 0 0;
+}
+.simple_form-aligned .pure-controls {
+    margin: 1.5em 0 0 11em;
 }
 
-.simple_form label.collection_radio {
-  margin-right: 10px;
-  margin-left: 2px;
+/* Rounded Inputs */
+.simple_form input.pure-input-rounded,
+.simple_form .pure-input-rounded {
+    border-radius: 2em;
+    padding: 0.5em 1em;
 }
 
-.simple_form .error {
-  clear: left;
-  margin-left: 120px;
-  font-size: 12px;
-  color: #D00;
-  display: block;
+/* Grouped Inputs */
+.simple_form .pure-group fieldset {
+    margin-bottom: 10px;
+}
+.simple_form .pure-group input,
+.simple_form .pure-group textarea {
+    display: block;
+    padding: 10px;
+    margin: 0 0 -1px;
+    border-radius: 0;
+    position: relative;
+    top: -1px;
+}
+.simple_form .pure-group input:focus,
+.simple_form .pure-group textarea:focus {
+    z-index: 3;
+}
+.simple_form .pure-group input:first-child,
+.simple_form .pure-group textarea:first-child {
+    top: 1px;
+    border-radius: 4px 4px 0 0;
+    margin: 0;
+}
+.simple_form .pure-group input:first-child:last-child,
+.simple_form .pure-group textarea:first-child:last-child {
+    top: 1px;
+    border-radius: 4px;
+    margin: 0;
+}
+.simple_form .pure-group input:last-child,
+.simple_form .pure-group textarea:last-child {
+    top: -2px;
+    border-radius: 0 0 4px 4px;
+    margin: 0;
+}
+.simple_form .pure-group button {
+    margin: 0.35em 0;
 }
 
-.simple_form .hint {
-  clear: left;
-  margin-left: 120px;
-  font-size: 12px;
-  color: #555;
-  display: block;
-  font-style: italic;
+.simple_form .pure-input-1 {
+    width: 100%;
+}
+.simple_form .pure-input-2-3 {
+    width: 66%;
+}
+.simple_form .pure-input-1-2 {
+    width: 50%;
+}
+.simple_form .pure-input-1-3 {
+    width: 33%;
+}
+.simple_form .pure-input-1-4 {
+    width: 25%;
+}
+
+/* Inline help for forms */
+/* NOTE: pure-help-inline is deprecated. Use .simple_form-message-inline instead. */
+.simple_form .pure-help-inline,
+.simple_form-message-inline {
+    display: inline-block;
+    padding-left: 0.3em;
+    color: #666;
+    vertical-align: middle;
+    font-size: 0.875em;
+}
+
+/* Block help for forms */
+.simple_form-message {
+    display: block;
+    color: #666;
+    font-size: 0.875em;
 }
