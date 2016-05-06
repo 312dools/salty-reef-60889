@@ -162,3 +162,13 @@ body {
     }
   }
 }
+
+.simple_form {
+  textarea {
+    width: 100%;
+    min-height: 200px;
+    border: 1px solid #d1d1d1;
+    border-radius: .2em;
+    margin: 1em 0;
+  }
+}
